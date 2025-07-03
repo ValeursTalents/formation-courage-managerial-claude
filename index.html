@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courage Managérial - Formation Abylon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Calibri', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #473c32 0%, #2c2821 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,0 Q500,100 1000,0 L1000,100 L0,100 Z" fill="rgba(148,193,31,0.1)"/></svg>') no-repeat center bottom;
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo svg {
+            width: 200px;
+            height: auto;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #94c11f;
+            font-weight: 500;
+        }
+
+        .date-info {
+            background: rgba(238,118,1,0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(45deg, #94c11f, #7ba01a);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        /* Program Section */
+        .program-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .program-section h3 {
+            color: #473c32;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #94c11f;
+            padding-bottom: 15px;
+        }
+
+        .accordion {
+            margin-top: 20px;
+        }
+
+        .accordion-item {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #473c32;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: #94c11f;
+            color: white;
+        }
+
+        .accordion-header.active {
+            background: #94c11f;
+            color: white;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        .module-details {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .module-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .module-content {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .info-card h4 {
+            color: #473c32;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #94c11f;
+            padding-bottom: 10px;
+        }
+
+        .info-card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .download-section {
+            background: #94c11f;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .download-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            background: white;
+            color: #94c11f;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .download-btn:hover {
+            background: #ee7601;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Map Section */
+        .map-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
+        }
+
+        .map-section h3 {
+            color: #473c32;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #94c11f;
+            padding-bottom: 15px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .address-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .address-info h4 {
+            color: #473c32;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .address-info p {
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #473c32;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            color: #94c11f;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        .footer-section a {
+            color: #94c11f;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ee7601;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #5a4d42;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-banner h2 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles */
+        button:focus,
+        a:focus,
+        .accordion-header:focus {
+            outline: 2px solid #94c11f;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="160" height="20" fill="#94c11f" rx="10"/>
+                        <text x="100" y="35" text-anchor="middle" font-family="Calibri, sans-serif" font-size="16" font-weight="bold" fill="white">ABYLON</text>
+                        <path d="M40 15 Q50 5 60 15" stroke="#94c11f" stroke-width="2" fill="none"/>
+                        <path d="M140 15 Q150 5 160 15" stroke="#94c11f" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                <h1>Courage Managérial</h1>
+                <p class="subtitle">Développez votre leadership dans un environnement VUCA</p>
+                <div class="date-info">
+                    <strong>Mardi 8 juillet 2025 | 8h30-12h30</strong><br>
+                    Locaux Abylon - 12 rue de l'Isly, Saint-Lazare, Paris 75008
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Osez prendre des décisions courageuses</h2>
+                <p>Dans un monde VUCA (Volatilité, Incertitude, Complexité, Ambiguïté), les managers doivent développer leur courage pour fédérer leurs équipes et prendre des décisions éclairées. Cette formation vous accompagne dans cette démarche.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Program Section -->
+                <section class="program-section">
+                    <h3>Programme de formation</h3>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span><strong>Module 1:</strong> Fundamentals du courage</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="module-details">
+                                    <div class="module-meta">
+                                        <span><strong>Durée:</strong> ½ journée</span>
+                                        <span><strong>Méthode:</strong> Apports théoriques, exercices de réflexion</span>
+                                    </div>
+                                    <div class="module-content">
+                                        <strong>Contenu principal:</strong>
+                                        <ul>
+                                            <li>Définition du courage managérial</li>
+                                            <li>Cadre VUCA</li>
+                                            <li>Étude de cas</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span><strong>Module 2:</strong> Connaissance de soi</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="module-details">
+                                    <div class="module-meta">
+                                        <span><strong>Durée:</strong> ½ journée</span>
+                                        <span><strong>Méthode:</strong> Tests, retours d'expérience</span>
+                                    </div>
+                                    <div class="module-content">
+                                        <strong>Contenu principal:</strong>
+                                        <ul>
+                                            <li>Identification des valeurs</li>
+                                            <li>Analyse des situations de zone de confort</li>
+                                            <li>Plan d'action individuel</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span><strong>Module 3:</strong> Communication assertive</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="module-details">
+                                    <div class="module-meta">
+                                        <span><strong>Durée:</strong> 1 journée</span>
+                                        <span><strong>Méthode:</strong> Ateliers pratiques</span>
+                                    </div>
+                                    <div class="module-content">
+                                        <strong>Contenu principal:</strong>
+                                        <ul>
+                                            <li>Techniques de feedback constructif</li>
+                                            <li>Gestion des conflits</li>
+                                            <li>Jeux de rôle</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span><strong>Module 4:</strong> Leadership inspirant</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="module-details">
+                                    <div class="module-meta">
+                                        <span><strong>Durée:</strong> 1 journée</span>
+                                        <span><strong>Méthode:</strong> Mises en situation</span>
+                                    </div>
+                                    <div class="module-content">
+                                        <strong>Contenu principal:</strong>
+                                        <ul>
+                                            <li>Posture de leader</li>
+                                            <li>Narration influente</li>
+                                            <li>Coaching d'équipe</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="info-card">
+                        <h4>🎯 Objectifs</h4>
+                        <p>Comprendre les leviers du courage managérial</p>
+                        <p>Identifier ses freins et construire un plan d'action</p>
+                        <p>Développer son assertivité dans la prise de parole</p>
+                        <p>Créer un climat de confiance favorisant l'innovation</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>👥 Public visé</h4>
+                        <p>Managers de proximité</p>
+                        <p>Chefs de projet</p>
+                        <p>Pilotes d'équipes</p>
+                    </div>
+
+                    <div class="download-section">
+                        <h4>📥 Téléchargements</h4>
+                        <a href="#" class="download-btn" onclick="alert('Programme PDF disponible lors de la formation')">
+                            📄 Programme détaillé
+                        </a>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Map Section -->
+            <section class="map-section">
+                <h3>📍 Lieu de formation</h3>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.394!2d2.325!3d48.8756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUyJzMyLjIiTiAywrAxOSczMC4wIkU!5e0!3m2!1sfr!2sfr!4v1000000000000!5m2!1sfr!2sfr"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Localisation de la formation - 12 rue de l'Isly, Paris 75008">
+                    </iframe>
+                </div>
+                <div class="address-info">
+                    <h4>Locaux Abylon</h4>
+                    <p>12 rue de l'Isly<br>Saint-Lazare, Paris 75008</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>📧 Contact Formateur</h4>
+                    <p>Mickael Loeuille</p>
+                    <p>Email: <a href="mailto:mickael.loeuille@valeurs-et-talents.fr">mickael.loeuille@valeurs-et-talents.fr</a></p>
+                    <p>Téléphone: <a href="tel:0681255388">06 81 25 53 88</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>♿ Accessibilité</h4>
+                    <p>Notre organisme s'engage pour l'inclusion</p>
+                    <p><a href="https://www.valeurs-et-talents.fr/qui-sommes-nous/nos-engagements-sur-le-handicap/" target="_blank">Politique d'inclusion et de gestion du handicap</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeurs et Talents - Formation Courage Managérial</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('.accordion-icon');
+            
+            // Close all other accordions
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            allHeaders.forEach(header => {
+                if (header !== element) {
+                    header.classList.remove('active');
+                    header.nextElementSibling.classList.remove('active');
+                    header.querySelector('.accordion-icon').textContent = '+';
+                }
+            });
+            
+            // Toggle current accordion
+            element.classList.toggle('active');
+            content.classList.toggle('active');
+            
+            if (element.classList.contains('active')) {
+                icon.textContent = '−';
+            } else {
+                icon.textContent = '+';
+            }
+        }
+
+        // Add keyboard navigation for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (e.target.classList.contains('accordion-header')) {
+                    e.preventDefault();
+                    toggleAccordion(e.target);
+                }
+            }
+        });
+
+        // Add focus management for better accessibility
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('role', 'button');
+            header.setAttribute('aria-expanded', 'false');
+        });
+    </script>
+</body>
+</html>
